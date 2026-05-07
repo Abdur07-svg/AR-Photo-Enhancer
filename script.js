@@ -13,6 +13,8 @@ let originalImage = null;
         const progressFill = document.getElementById('progressFill');
         const enhanceBtn = document.getElementById('enhanceBtn');
         const saveBtn = document.getElementById('saveBtn');
+        const previewModal = document.getElementById('previewModal');
+        const previewModalImg = document.getElementById('previewModalImg');
 
         // Drag & Drop
         uploadArea.addEventListener('dragover', (e) => {
@@ -33,6 +35,14 @@ let originalImage = null;
             }
         });
 
+        enhancedImg.addEventListener('click', openImagePreview);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideImagePreview();
+            }
+        });
+
         function handleFileSelect(e) {
             const file = e.target.files[0];
             if (file) processFile(file);
@@ -49,6 +59,7 @@ let originalImage = null;
                 originalImage = e.target.result;
                 originalImg.src = originalImage;
                 enhancedImg.src = originalImage;
+                enhancedImg.classList.remove('preview-ready');
 
                 uploadArea.style.display = 'none';
                 enhanceOptions.classList.add('active');
@@ -136,6 +147,7 @@ let originalImage = null;
                 ctx.putImageData(imageData, 0, 0);
                 enhancedImageData = canvas.toDataURL('image/jpeg', 0.95);
                 enhancedImg.src = enhancedImageData;
+                enhancedImg.classList.add('preview-ready');
             };
             img.src = originalImage;
         }
@@ -248,6 +260,25 @@ let originalImage = null;
             ctx.putImageData(dst, 0, 0);
             enhancedImageData = canvas.toDataURL('image/jpeg', 0.95);
             enhancedImg.src = enhancedImageData;
+            enhancedImg.classList.add('preview-ready');
+        }
+
+        function openImagePreview() {
+            if (!enhancedImageData || isEnhancing) return;
+
+            previewModalImg.src = enhancedImageData;
+            previewModal.classList.add('show');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeImagePreview(e) {
+            if (e && e.target !== previewModal && !e.target.closest('.preview-close')) return;
+            hideImagePreview();
+        }
+
+        function hideImagePreview() {
+            previewModal.classList.remove('show');
+            document.body.classList.remove('modal-open');
         }
 
         function saveToGallery() {
@@ -268,6 +299,8 @@ let originalImage = null;
             fileInput.value = '';
             originalImage = null;
             enhancedImageData = null;
+            enhancedImg.classList.remove('preview-ready');
+            hideImagePreview();
             progressFill.style.width = '0%';
             saveBtn.style.display = 'none';
             enhanceBtn.style.display = 'inline-flex';

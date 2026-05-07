@@ -91,7 +91,7 @@
                             <span class="dot enhanced"></span> Enhanced
                         </div>
                         <div class="image-wrapper" id="enhancedWrapper">
-                            <img id="enhancedImg" src="" alt="Enhanced">
+                            <img id="enhancedImg" src="" alt="Enhanced" title="Click to preview">
                             <div class="enhancing-overlay" id="enhancingOverlay">
                                 <div class="spinner"></div>
                                 <div class="enhancing-text">Enhancing your photo...</div>
@@ -128,6 +128,14 @@
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
         <span id="toastMsg">Success!</span>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="preview-modal" id="previewModal" onclick="closeImagePreview(event)">
+        <button class="preview-close" type="button" onclick="closeImagePreview(event)" aria-label="Close preview">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="previewModalImg" src="" alt="Enhanced photo preview">
     </div>
 
     <script src="script.js"></script>

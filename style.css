@@ -23,6 +23,10 @@
             overflow-x: hidden;
         }
 
+        body.modal-open {
+            overflow: hidden;
+        }
+
         /* Animated Background */
         .bg-shapes {
             position: fixed;
@@ -340,6 +344,14 @@
             display: block;
         }
 
+        #enhancedImg.preview-ready {
+            cursor: zoom-in;
+        }
+
+        #enhancedImg.preview-ready:hover {
+            filter: brightness(0.95);
+        }
+
         .image-wrapper .placeholder-text {
             color: #aaa;
             font-size: 14px;
@@ -561,6 +573,52 @@
 
         .toast i {
             color: var(--secondary);
+        }
+
+        /* Enhanced Image Preview */
+        .preview-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 2000;
+        }
+
+        .preview-modal.show {
+            display: flex;
+        }
+
+        .preview-modal img {
+            max-width: min(100%, 1100px);
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.45);
+        }
+
+        .preview-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .preview-close:hover {
+            transform: scale(1.06);
         }
 
         /* Footer */
