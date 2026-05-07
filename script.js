@@ -75,6 +75,16 @@ let originalImage = null;
             document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
             selectedMode = card.dataset.mode;
+
+            if (enhancedImageData) {
+                enhancedImageData = null;
+                enhancedImg.src = originalImage;
+                enhancedImg.classList.remove('preview-ready');
+                progressFill.style.width = '0%';
+                saveBtn.style.display = 'none';
+                enhanceBtn.style.display = 'inline-flex';
+                hideImagePreview();
+            }
         }
 
         function enhancePhoto() {
