@@ -7,11 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" sizes="32x32" href="images/favicon-32.png">
-    <link rel="icon" sizes="16x16" href="images/favicon-16.png">
-    <link rel="icon" sizes="192x192" href="images/favicon-192.png">
-    <link rel="apple-touch-icon" href="images/favicon-180.png">
-    <meta name="theme-color" content="#0a0a0a">
 </head>
 <body>
     <!-- Animated Background -->
@@ -77,6 +72,22 @@
                         <div class="option-icon"><i class="fas fa-circle-half-stroke"></i></div>
                         <div class="option-name">B&W Pro</div>
                     </div>
+                    <!-- NEW PRESETS -->
+                    <div class="option-card preset" data-mode="hd" onclick="selectMode(this)">
+                        <div class="option-icon"><i class="fas fa-gem"></i></div>
+                        <div class="option-name">HD Boost</div>
+                        <div class="preset-tag">NEW</div>
+                    </div>
+                    <div class="option-card preset" data-mode="insta" onclick="selectMode(this)">
+                        <div class="option-icon"><i class="fab fa-instagram"></i></div>
+                        <div class="option-name">Instagram Look</div>
+                        <div class="preset-tag">NEW</div>
+                    </div>
+                    <div class="option-card preset" data-mode="dark" onclick="selectMode(this)">
+                        <div class="option-icon"><i class="fas fa-moon"></i></div>
+                        <div class="option-name">Dark Mode</div>
+                        <div class="preset-tag">NEW</div>
+                    </div>
                 </div>
             </div>
 
@@ -109,12 +120,30 @@
                     </div>
                 </div>
 
+                <!-- Before/After Compare Slider -->
+                <div class="compare-slider" id="compareSlider">
+                    <div class="compare-labels">
+                        <span class="compare-label">Original</span>
+                        <span class="compare-label">Enhanced</span>
+                    </div>
+                    <img class="compare-img compare-before" id="compareBefore" src="" alt="Original">
+                    <div class="compare-overlay" id="compareOverlay">
+                        <img class="compare-img compare-after" id="compareAfter" src="" alt="Enhanced">
+                    </div>
+                    <div class="compare-handle" id="compareHandle">
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                </div>
+
                 <div class="action-buttons">
                     <button class="btn btn-secondary" onclick="resetApp()">
                         <i class="fas fa-redo"></i> New photo
                     </button>
                     <button class="btn btn-primary" onclick="enhancePhoto()" id="enhanceBtn">
                         <i class="fas fa-wand-magic-sparkles"></i> Enhance
+                    </button>
+                    <button class="btn btn-compare" onclick="toggleCompare()" id="compareBtn" style="display:none;">
+                        <i class="fas fa-columns"></i> Compare
                     </button>
                     <button class="btn btn-success" onclick="saveToGallery()" id="saveBtn" style="display:none;">
                         <i class="fas fa-download"></i> Save to Gallery
@@ -125,7 +154,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            Built with ❤️ by <a href="#">AR7</a> | Photo Enhancer App | v1.0
+            Built with ❤️ by <a href="#">AR7</a> | Photo Enhancer App | v2.0
         </footer>
     </div>
 
@@ -141,6 +170,20 @@
             <i class="fas fa-times"></i>
         </button>
         <img id="previewModalImg" src="" alt="Enhanced photo preview">
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-box">
+            <div class="loading-ring">
+                <div></div><div></div><div></div><div></div>
+            </div>
+            <div class="loading-text">Processing your image...</div>
+            <div class="loading-subtext">Optimizing for best results</div>
+            <div class="loading-progress">
+                <div class="loading-progress-fill" id="loadingProgressFill"></div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
